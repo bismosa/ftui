@@ -11,7 +11,7 @@ import { FtuiElement } from '../element.component.js';
 import { FtuiChartData } from './chart-data.component.js';
 import { fhemService } from '../../modules/ftui/fhem.service.js';
 import { Chart } from '../../modules/chart.js/chart.min.js';
-import { dateFormat, getStylePropertyValue } from '../../modules/ftui/ftui.helper.js';
+import { dateFormat, getStylePropertyValue, isVisible } from '../../modules/ftui/ftui.helper.js';
 import '../../modules/chart.js/chartjs-adapter-date-fns.bundle.min.js';
 
 const HOUR = 3600 * 1000;
@@ -322,6 +322,9 @@ export class FtuiChart extends FtuiElement {
   }
 
   refresh() {
+    if (!(isVisible(this))) {
+      return;
+    }
     this.updateControls();
 
     this.dataElements.forEach(dataElement => {
