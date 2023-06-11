@@ -63,7 +63,17 @@ export class FtuiChartData extends FtuiElement {
   }
 
   fetch() {
-    if (!this.isLoading && ftuiHelper.isVisible(this)) {
+    const pop_parent = this.closest('ftui-popup');
+    if (pop_parent){
+      if (!(ftuiHelper.isVisible(pop_parent))){
+        return;
+      }
+    } else {
+      if (!(ftuiHelper.isVisible(this))) {
+        return;
+      }
+    }
+    if (!this.isLoading) {
       this.fetchLogItems(this.log, this.file, this.spec);
     }
   }
