@@ -322,8 +322,15 @@ export class FtuiChart extends FtuiElement {
   }
 
   refresh() {
-    if (!(isVisible(this))) {
-      return;
+    const pop_parent = this.closest('ftui-popup');
+    if (pop_parent){
+      if (!(isVisible(pop_parent))){
+        return;
+      }
+    } else {
+      if (!(isVisible(this))) {
+        return;
+      }
     }
     this.updateControls();
 
